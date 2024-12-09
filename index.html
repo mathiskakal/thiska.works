@@ -6,93 +6,41 @@
 
     <title>Work in Progress</title>
 
-    <style>
-        @font-face {
-            font-family: 'KHFont';
-            src: url('fonts/kh.ttf') format('truetype');
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: left;
-            max-width: 400px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            clip-path: polygon(10% 0%, 90% 5%, 95% 90%, 0% 95%);
-        }
-
-        .logo-placeholder {
-            width: 100px;
-            height: 100px;
-            border: 2px solid black;
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-        }
-
-        h1 {
-            font-family: 'KHFont', sans-serif;
-            font-size: 34px;
-            margin: 10px 0;
-            transform: rotate(5deg) translateX(40%);
-            text-align: center;
-            position: relative;
-            left: 10%;
-            display: inline-block;
-        }
-        
-        h2 {
-            font-family: 'KHFont', sans-serif;
-            transform: rotate(-2deg);
-            display: inline-block;
-            font-size: 21px;
-            color: #555;
-            margin: 10px 0;
-        }
-        
-        p {
-            font-family: 'KHFont', sans-serif;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.5;
-            transform: rotate(-1deg);
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="logo-placeholder">
-            <!-- Logo goes here -->
+        <div class="logo-container">
+            <img src="img/logo.png" alt="Logo">
+            <div class="logo-text">thiska</div>
         </div>
-        <h1>Work in Progress.</h1>
-        <h2>Please come back later...</h2>
-        <p>
-            My name is thiska. <br>
-            I love computer science but let’s face it, <br>
-            really here to solve problems, <br>not to make love to computers.
-        </p>
-        <p style="padding-left: 0.1rem;">
-            If you like innovation, arts, and all sorts of experiments, <br>
-            there will eventually be something here for you.
-        </p>
+        <div class="rotated h1">
+            <div class="floating">
+                <h1>Work in Progress.</h1>
+            </div>
+        </div>
+        <div class="rotated h2">
+            <div class="floating">
+                <h2>Please come back later...</h2>
+            </div>
+        </div>
+        <div class="rotated p">
+            <div class="floating">
+                <p>
+                    My name is thiska. <br>
+                    I love computer science but let’s face it, <br>
+                    really here to solve problems, <br>not to make love to computers.
+                </p>
+            </div>
+        </div>
+        <div class="rotated p">
+            <div class="floating">
+                <p style="padding-left: 0.1rem;">
+                    If you like innovation, arts, and all sorts of experiments, <br>
+                    there will eventually be something here for you.
+                </p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

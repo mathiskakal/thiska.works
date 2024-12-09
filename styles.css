@@ -1,0 +1,148 @@
+/* FONTS */
+
+@font-face {
+    font-family: 'KHFont';
+    src: url('fonts/kh.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Yukari';
+    src: url('fonts/yukari.ttf') format('truetype');
+}
+
+/* RULES */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: left;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(10% 0%, 90% 5%, 95% 90%, 0% 95%);
+}
+
+.logo-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    animation: spinCounterClockwise 5s linear infinite;
+}
+
+.logo-container .logo-text {
+    position: absolute;
+    font-family: 'Yukari', sans-serif;
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    z-index: 1; 
+}
+
+h1 {
+    font-family: 'KHFont', sans-serif;
+    font-size: 36px;
+    margin: 10px 0;
+    text-align: center;
+    position: relative;
+    left: 10%;
+
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+    
+}
+
+h1:hover {
+    transform: scale(10.1);
+    color: #ff6347;
+}
+
+
+p:hover {
+    transform: scale(1.2) rotate(10deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+h2:hover {
+    letter-spacing: 7px;
+}
+
+h2 {
+    font-family: 'KHFont', sans-serif;
+    font-size: 21px;
+    color: #555;
+    margin: 10px 0;
+    transition: letter-spacing 0.3s ease;
+}
+
+p {
+    font-family: 'KHFont', sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+
+
+.rotated.h1 {
+    transform: rotate(5deg) translateX(35%);
+}
+
+.rotated.h2 {
+    transform: rotate(-2deg);
+}
+
+.rotated.p {
+    transform: rotate(-1deg);
+}
+
+/* ANIMATIONS */
+
+@keyframes spinCounterClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.rotated {
+    display: inline-block;
+    transform-origin: top left;
+}
+
+.floating {
+    display: inline-block;
+    animation: floatUpDown 5s ease-in-out infinite;
+}
+
