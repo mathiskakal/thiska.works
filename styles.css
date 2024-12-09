@@ -115,6 +115,17 @@ p {
 .rotated.p {
     transform: rotate(-1deg);
 }
+ 
+
+/* .goodbye {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    font-family: 'KHFont', sans-serif;
+    font-size: 18px;
+    color: black;
+    transform: rotate(-30deg);
+} */
 
 /* ANIMATIONS */
 
