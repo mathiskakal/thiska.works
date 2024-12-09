@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work in Progress</title>
-    <style>
-        @font-face {
-            font-family: 'KHFont';
-            src: url('fonts/kh.ttf') format('truetype');
-        }
 
+    <title>Work in Progress</title>
+
+    <style>
         @font-face {
             font-family: 'KHFont';
             src: url('fonts/kh.ttf') format('truetype');
@@ -33,6 +30,9 @@
             background: white;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(10% 0%, 90% 5%, 95% 90%, 0% 95%);
         }
 
         .logo-placeholder {
@@ -49,13 +49,20 @@
 
         h1 {
             font-family: 'KHFont', sans-serif;
-            font-size: 40px;
+            font-size: 34px;
             margin: 10px 0;
+            transform: rotate(5deg) translateX(40%);
+            text-align: center;
+            position: relative;
+            left: 10%;
+            display: inline-block;
         }
         
         h2 {
             font-family: 'KHFont', sans-serif;
-            font-size: 20px;
+            transform: rotate(-2deg);
+            display: inline-block;
+            font-size: 21px;
             color: #555;
             margin: 10px 0;
         }
@@ -65,6 +72,8 @@
             font-size: 14px;
             color: #333;
             line-height: 1.5;
+            transform: rotate(-1deg);
+            display: inline-block;
         }
     </style>
 </head>
@@ -78,7 +87,9 @@
         <p>
             My name is thiska. <br>
             I love computer science but let’s face it, <br>
-            really here to solve problems not to make love to computers. <br><br>
+            really here to solve problems, <br>not to make love to computers.
+        </p>
+        <p style="padding-left: 0.1rem;">
             If you like innovation, arts, and all sorts of experiments, <br>
             there will eventually be something here for you.
         </p>
