@@ -28,4 +28,4 @@ Animations and interactive components should be built as reusable, composable pa
 
 ## About the author
 
-Mathis Kakal — Paris-based developer, former mediatech startup CTO, full-stack (assembly to Flutter), UX competition background, long-time UT reader. Building this to show what UT articles could become as interactive experiences.G
+Mathis Kakal — Paris-based developer, former mediatech startup CTO, full-stack (assembly to Flutter), UX competition background, long-time UT reader. Building this to show what UT articles could become as interactive experiences.
