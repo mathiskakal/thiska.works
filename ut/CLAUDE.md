@@ -22,6 +22,10 @@ An interactive scrollytelling web page for a job application to Uncharted Territ
 - Must feel polished — quality over quantity
 - Keep it lightweight and fast-loading
 
+## Design philosophy
+
+Animations and interactive components should be built as reusable, composable patterns — not one-off bespoke effects. The goal isn't just to make one beautiful page; it's to demonstrate that a scalable "text article → visual essay" pipeline is possible. Every interaction built here should feel like it could be parameterized and applied to the next article.
+
 ## About the author
 
-Mathis Kakal — Paris-based developer, former mediatech startup CTO, full-stack (assembly to Flutter), UX competition background, long-time UT reader. Building this to show what UT articles could become as interactive experiences.
+Mathis Kakal — Paris-based developer, former mediatech startup CTO, full-stack (assembly to Flutter), UX competition background, long-time UT reader. Building this to show what UT articles could become as interactive experiences.G
