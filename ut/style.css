@@ -486,7 +486,7 @@ aside[data-footnote-type="context"] {
 }
 
 /* ============================================================
-   13. JS-DRIVEN ANIMATION STATES
+   12. JS-DRIVEN ANIMATION STATES
        Armed only when body.js-active is present.
        Ensures content is fully visible without JS.
    ============================================================ */
@@ -574,7 +574,7 @@ body.reduced-motion [data-component="progressive-reveal"] li {
 }
 
 /* ============================================================
-   14. SECTION SEPARATORS
+   13. SECTION SEPARATORS
    ============================================================ */
 
 section + section {
@@ -587,7 +587,221 @@ section + section {
 }
 
 /* ============================================================
-   14. RESPONSIVE — MOBILE FIRST
+   14. MAP SEQUENCE COMPONENT
+       .map-stage — sticky full-width panel, stacks all maps
+                    with crossfade. JS moves map figures here.
+       .map-frame — individual map (position:absolute, crossfade)
+       .map-timeline — nav bar at stage bottom with year buttons
+   ============================================================ */
+
+/* Stage: sticky while section is in view */
+.map-stage {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: 55vh;
+  min-height: 260px;
+  max-height: 540px;
+  background: var(--mood-bg);
+  overflow: hidden;
+  /* Feather bottom edge into prose below */
+  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  margin-bottom: var(--space-md);
+}
+
+/* Individual map frame — stacked, crossfade */
+.map-frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-md) 3rem; /* bottom room for timeline */
+  opacity: 0;
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.map-frame.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.map-frame img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Override generic figure img rule */
+  border-radius: 2px;
+}
+
+/* Suppress the generic scroll-reveal hidden state on map frames —
+   map visibility is controlled by .is-active, not .in-view */
+body.js-active .map-frame {
+  opacity: 0 !important; /* overridden by .is-active below */
+}
+
+body.js-active .map-frame.is-active {
+  opacity: 1 !important;
+}
+
+/* Timeline bar */
+.map-timeline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-md);
+  background: linear-gradient(
+    transparent,
+    color-mix(in srgb, var(--mood-bg) 90%, transparent) 40%,
+    var(--mood-bg) 100%
+  );
+}
+
+.map-timeline-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.map-timeline-connector {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--mood-rule);
+  flex-shrink: 0;
+}
+
+.map-timeline-btn {
+  background: none;
+  border: 1.5px solid var(--mood-rule);
+  border-radius: 100px;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--mood-muted);
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  white-space: nowrap;
+}
+
+.map-timeline-btn:hover {
+  border-color: var(--mood-accent);
+  color: var(--mood-accent);
+}
+
+.map-timeline-btn[aria-pressed="true"] {
+  border-color: var(--mood-accent);
+  color: var(--mood-bg);
+  background: var(--mood-accent);
+}
+
+/* Mobile: slightly shorter stage */
+@media (max-width: 639px) {
+  .map-stage {
+    height: 42vh;
+    min-height: 220px;
+  }
+}
+
+/* Reduced motion: instant crossfade */
+body.reduced-motion .map-frame {
+  transition: none !important;
+}
+
+/* ============================================================
+   15. SWITCHER COMPONENT
+       [data-component="switcher"] — crop comparison
+       Mobile: pill tabs, one figure visible at a time
+       Desktop: CSS grid, both figures side-by-side
+       JS adds .switcher-ready once it has enhanced the DOM.
+   ============================================================ */
+
+[data-component="switcher"] {
+  max-width: var(--col-wide);
+  margin: var(--space-lg) auto;
+  padding: 0 var(--space-md);
+}
+
+/* --- Tab bar (visible on mobile, hidden on desktop) --- */
+.switcher-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.switcher-tab {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--mood-rule);
+  border-radius: 100px;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--mood-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  text-align: center;
+}
+
+.switcher-tab:hover {
+  border-color: var(--mood-accent);
+  color: var(--mood-accent);
+}
+
+.switcher-tab[aria-selected="true"] {
+  background: var(--mood-accent);
+  border-color: var(--mood-accent);
+  color: var(--mood-bg);
+}
+
+/* --- Mobile: hide inactive figure --- */
+[data-component="switcher"].switcher-ready figure[aria-hidden="true"] {
+  display: none;
+}
+
+/* --- Figure label (injected by JS, visible on desktop) --- */
+.switcher-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mood-muted);
+  margin-bottom: var(--space-xs);
+}
+
+/* --- Desktop: side-by-side grid --- */
+@media (min-width: 640px) {
+  [data-component="switcher"].switcher-ready {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    align-items: start;
+  }
+
+  /* Tab bar spans full width but is hidden on desktop */
+  .switcher-tabs {
+    display: none;
+  }
+
+  /* Both figures always visible on desktop — override mobile hide */
+  [data-component="switcher"].switcher-ready figure {
+    display: block !important;
+  }
+}
+
+/* ============================================================
+   16. RESPONSIVE — MOBILE FIRST
    ============================================================ */
 
 /* Base styles above are already mobile-friendly.
@@ -624,7 +838,7 @@ section + section {
 }
 
 /* ============================================================
-   15. PRINT STYLES
+   17. PRINT STYLES
    ============================================================ */
 
 @media print {
@@ -679,7 +893,7 @@ section + section {
 }
 
 /* ============================================================
-   16. REDUCED MOTION
+   18. REDUCED MOTION
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {

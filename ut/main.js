@@ -96,7 +96,9 @@ function initScrollReveal() {
   const targets = document.querySelectorAll(
     '[data-component="chapter-break"],' +
     '[data-component="sub-break"],' +
-    'figure[data-img-id],' +
+    // Exclude map-sequence figures — their visibility is controlled
+    // by .is-active inside the sticky stage, not by scroll-reveal.
+    'figure[data-img-id]:not([data-component="map-sequence"]),' +
     'blockquote[data-component="rich-quote"]'
   );
 
@@ -259,26 +261,205 @@ function initFootnotes() {
 }
 
 // ============================================================
+// SWITCHER COMPONENT
+//    [data-component="switcher"] — crop comparison (img-11 / img-12)
+//
+//    JS adds tab bar and labels to the DOM, then adds .switcher-ready
+//    to the container. CSS handles the rest:
+//    - Mobile: tabs are visible, inactive figure has aria-hidden="true"
+//              (CSS display:none)
+//    - Desktop ≥640px: tabs hidden, grid layout shows both figures
+//
+//    Screen-size agnostic: no matchMedia in JS — CSS owns the layout.
+// ============================================================
+
+function initSwitcher() {
+  const switchers = document.querySelectorAll('[data-component="switcher"]');
+  if (!switchers.length) return;
+
+  switchers.forEach((container) => {
+    const figures = Array.from(
+      container.querySelectorAll('figure[data-switcher-label]')
+    );
+    if (figures.length < 2) return;
+
+    // --- Build tab bar ---
+    const tabBar = document.createElement('div');
+    tabBar.className = 'switcher-tabs';
+    tabBar.setAttribute('role', 'tablist');
+    tabBar.setAttribute('aria-label', 'Select crop region');
+
+    const tabs = figures.map((fig, i) => {
+      const tab = document.createElement('button');
+      tab.className = 'switcher-tab';
+      tab.textContent = fig.dataset.switcherLabel;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('type', 'button');
+      tab.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+
+      // Start: second figure hidden on mobile
+      if (i !== 0) fig.setAttribute('aria-hidden', 'true');
+
+      tab.addEventListener('click', () => {
+        // Deactivate all
+        tabs.forEach((t, j) => {
+          t.setAttribute('aria-selected', 'false');
+          figures[j].setAttribute('aria-hidden', 'true');
+        });
+        // Activate clicked
+        tab.setAttribute('aria-selected', 'true');
+        fig.removeAttribute('aria-hidden');
+      });
+
+      tabBar.appendChild(tab);
+      return tab;
+    });
+
+    // --- Inject labels above each figure (visible on desktop) ---
+    figures.forEach((fig) => {
+      const label = document.createElement('div');
+      label.className = 'switcher-label';
+      label.setAttribute('aria-hidden', 'true'); // decorative on desktop; tabs cover mobile
+      label.textContent = fig.dataset.switcherLabel;
+      fig.prepend(label);
+    });
+
+    // Tab bar goes before the figures
+    container.prepend(tabBar);
+
+    // Signal CSS the DOM is ready
+    container.classList.add('switcher-ready');
+  });
+}
+
+// ============================================================
+// MAP SEQUENCE COMPONENT
+//    Sticky crossfade map panel with a clickable year timeline.
+//    Works with IntersectionObserver — no Scrollama needed since
+//    we only need enter/exit, not continuous scroll progress.
+//
+//    DOM restructuring:
+//    1. Collects [data-component="map-sequence"] figures from section
+//    2. Builds .map-stage (sticky) and moves figures into it
+//    3. Inserts stage before the first [data-map-trigger] paragraph
+//    4. Watches trigger paragraphs to crossfade maps on scroll
+//
+//    Graceful degradation: without JS, all three maps render
+//    inline as regular images between the prose.
+// ============================================================
+
+function buildTimeline(figures, onActivate) {
+  const nav = document.createElement('nav');
+  nav.className = 'map-timeline';
+  nav.setAttribute('aria-label', 'Navigate maps by year');
+
+  const track = document.createElement('div');
+  track.className = 'map-timeline-track';
+
+  figures.forEach((fig, i) => {
+    if (i > 0) {
+      const connector = document.createElement('div');
+      connector.className = 'map-timeline-connector';
+      connector.setAttribute('aria-hidden', 'true');
+      track.appendChild(connector);
+    }
+
+    const btn = document.createElement('button');
+    btn.className = 'map-timeline-btn';
+    btn.textContent = fig.dataset.year;
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    btn.addEventListener('click', () => onActivate(i));
+    track.appendChild(btn);
+  });
+
+  nav.appendChild(track);
+  return nav;
+}
+
+function initMapSequence() {
+  const mapFigures = Array.from(
+    document.querySelectorAll('[data-component="map-sequence"]')
+  );
+  if (mapFigures.length < 2) return;
+
+  const section = mapFigures[0].closest('section');
+  if (!section) return;
+
+  let activeIndex = 0;
+
+  // --- Activate a step: crossfade map + update timeline ---
+  function activateStep(index) {
+    if (index === activeIndex && index !== 0) return;
+    activeIndex = index;
+
+    mapFigures.forEach((fig, i) =>
+      fig.classList.toggle('is-active', i === index)
+    );
+
+    stage.querySelectorAll('.map-timeline-btn').forEach((btn, i) =>
+      btn.setAttribute('aria-pressed', i === index ? 'true' : 'false')
+    );
+  }
+
+  // --- Build sticky stage ---
+  const stage = document.createElement('div');
+  stage.className = 'map-stage';
+  stage.setAttribute('role', 'img');
+  stage.setAttribute(
+    'aria-label',
+    'Interactive map: free vs slave states 1789–1861'
+  );
+
+  mapFigures.forEach((fig, i) => {
+    fig.classList.add('map-frame');
+    if (i === 0) fig.classList.add('is-active');
+    // Moving the DOM node also removes it from its original position
+    stage.appendChild(fig);
+  });
+
+  const timeline = buildTimeline(mapFigures, activateStep);
+  stage.appendChild(timeline);
+
+  // --- Insert stage before the first trigger paragraph ---
+  const firstTrigger = section.querySelector('[data-map-trigger]');
+  if (firstTrigger) {
+    section.insertBefore(stage, firstTrigger);
+  } else {
+    const h2 = section.querySelector('h2');
+    (h2 ? h2 : section.firstElementChild).after(stage);
+  }
+
+  // --- Watch trigger paragraphs ---
+  // rootMargin '-55% 0px -10% 0px' fires when the paragraph's top
+  // edge enters the band between 55vh and 90vh from viewport top —
+  // i.e., just below the sticky stage, in the prose reading area.
+  const triggers = section.querySelectorAll('[data-map-trigger]');
+  if (!triggers.length) return;
+
+  const stepObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const step = parseInt(entry.target.dataset.mapTrigger, 10);
+        if (!Number.isNaN(step)) activateStep(step);
+      });
+    },
+    { rootMargin: '-55% 0px -10% 0px', threshold: 0 }
+  );
+
+  triggers.forEach((t) => stepObserver.observe(t));
+}
+
+// ============================================================
 // STUBS — Pass 2+
 // ============================================================
 
 /*
-function initMapSequence() {
-  // Sticky crossfade map with timeline bar.
-  // Needs Scrollama for scroll-progress tracking (not just enter/exit).
-  // Components: img-05 (1789) → img-06 (1821) → img-08 (1861)
-  // See COMPONENTS.md #4
-}
-
 function initDataViz() {
   // D3 / Chart.js rendering for [data-component="data-viz"] figures.
   // Lazy-load D3 only when a data-viz enters the viewport.
   // See COMPONENTS.md #9
-}
-
-function initSwitcher() {
-  // Tab-based crop comparison: img-11 (North) vs img-12 (South).
-  // See COMPONENTS.md #7
 }
 
 function initCausalChain() {
@@ -296,7 +477,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('js-active');
   if (REDUCED_MOTION) document.body.classList.add('reduced-motion');
 
-  // Central observer registrations (order doesn't matter)
+  // DOM restructuring must happen before observers are attached
+  initMapSequence();
+  initSwitcher();
+
+  // Central observer registrations
   initScrollReveal();
   initSections();
 
