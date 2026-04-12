@@ -1,11 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climate Caused the US Civil War — An Interactive Essay</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Climate Caused the US Civil War">
+  <meta property="og:description" content="An interactive visual essay. Because of climate, the North farmed crops that needed little work. The South farmed crops that needed masses of enslaved people. And that caused the Civil War.">
+  <meta property="og:image" content="images/img-04.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://thiska.works/ut">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Climate Caused the US Civil War">
+  <meta name="twitter:description" content="An interactive visual essay based on Tomas Pueyo's Uncharted Territories.">
+  <meta name="twitter:image" content="images/img-04.jpg">
+
+  <!-- Structured data / SEO -->
+  <meta name="author" content="Tomas Pueyo ()">
+  <meta name="description" content="An interactive scrollytelling essay showing how climate and crop requirements caused the US Civil War.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <!-- TODO: @media print { } styles in style.css — ensure article is readable when printed -->
+  <!-- TODO: @media (prefers-reduced-motion: reduce) { } in style.css — disable all animations -->
+
+  <script defer src="main.js"></script>
 </head>
+
 <body>
-    
+
+  <!-- ============================================================
+       HEADER / HERO
+       ============================================================ -->
+
+  <!-- TODO: Component: image-motion
+       Image: img-04 (wheat/cotton split field, the visual hook for North vs South)
+       Motion type: parallax scroll on desktop; static on mobile.
+       On scroll-enter, animate the split between the two halves to emphasize North/South division.
+       Title fades in over the image. Consider a subtle Ken Burns drift on mobile.
+       See COMPONENTS.md #10 (Image with Motion), TODO.md "HEADER/HERO IMAGE [img-04]" -->
+  <header data-component="image-motion" data-motion-type="parallax">
+    <figure data-img-id="img-04">
+      <img
+        src="images/img-04.jpg"
+        alt="A field split between wheat (North) and cotton (South) — the visual metaphor for the article"
+        loading="eager"
+        width="1024"
+        height="1024">
+    </figure>
+    <div class="hero-title">
+      <h1>Climate Caused the US Civil War</h1>
+      <p class="byline">Tomas Pueyo · <em>Uncharted Territories</em></p>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       ARTICLE
+       ============================================================ -->
+  <article id="article">
+
+    <!-- ============================================================
+         SECTION 1: INTRO
+         ============================================================ -->
+    <section id="intro">
+
+      <p>The story people know about the US Civil War is that the South had slavery and the North was free. As each side expanded westward, they feared that the other side would prevail and force their solution on the other, and eventually they went to war over it.</p>
+
+      <p>That, right there, should give you pause: <em>North</em> and <em>South</em>? <em>West</em>ward expansion? Did geography have something to do with the Civil War? More than that: I think geography <em>caused</em> the Civil War. How?</p>
+
+      <p>Because of climate, the North farmed crops like wheat and barley that required very little work, and that work was easy to automate. This tended to make farmers independent, incentivize industrialization for the machinery, and push settlers west very fast, as they weren't as limited by labor needs.</p>
+
+      <p>Conversely, the crops grown in the south—mainly cotton, tobacco, sugarcane, and rice—all require substantially more work, so getting lots of workers at the lowest possible cost made or broke fortunes. This is why slavery emerged here, why it was fundamental to the South's economy, and why Southerners went to war to continue it.</p>
+
+      <!-- TODO: Component: chapter-break
+           Text: "Why does all this matter?"
+           This is the first Crucial Question — triggers the opening chapter-break transition.
+           Background fades/resets; question fades in large, centered, weighted type.
+           Beat of visual silence before the page continues.
+           See COMPONENTS.md #1 (Chapter Break / Crucial Question), TODO.md "INTRO" -->
+      <p data-component="chapter-break">Why does all this matter? It's not just a crucial fact of US history. This has dramatic consequences today, from the roots of racial inequality, to where the Democratic party wins elections, and the relative poverty of the US South.</p>
+
+      <!-- TODO: animate this paragraph as a literal scroll-driven "dive" — text sinks/descends
+           as the reader scrolls past it, transitioning into the first section.
+           See TODO.md "So let's dive in" -->
+      <p id="scroll-dive">So let's dive in: How exactly did climate cause the Civil War, and what are the consequences of that today?</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 2: THE SLAVERY RACE TO THE WEST
+         ============================================================ -->
+    <section id="slavery-race-west" data-mood="tension">
+
+      <h2>The Slavery Race to the West</h2>
+
+      <p>For decades, the rush westward had been fueled by one clause of the US Constitution:</p>
+
+      <!-- TODO: Component: rich-quote
+           Quote: US Constitution, Article I, Section 3
+           No portrait. Subtle background treatment (border-left or color block).
+           Mood: neutral — this is the legal anchor, not yet emotionally charged.
+           See COMPONENTS.md #6 (Rich Quote) -->
+      <blockquote data-component="rich-quote">
+        <p><em>The Senate of the United States shall be composed of two Senators from each State.</em></p>
+      </blockquote>
+
+      <p>If one side has 50% or more of senators,<sup id="fnref-1"><a href="#fn-1">1</a></sup> it can block any legislation it dislikes,<sup id="fnref-2"><a href="#fn-2">2</a></sup> including the most controversial one at the time: slavery.</p>
+
+      <!-- fn-1: Context — explains bicameral congress -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-1">
+        <p>Since the US is <a href="https://en.wikipedia.org/wiki/Bicameralism" target="_blank" rel="noopener">bicameral</a>, which means it has the House and the Senate, and both need to agree to approve a law. With filibustering, even fewer senators are necessary to block some types of legislation.</p>
+      </aside>
+
+      <!-- fn-2: Context — explains House vs Senate legislation mechanics -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-2">
+        <p>Bills need to be approved by the House and the Senate. The House represents population, and the Senate represents land (states). If one side has a majority in the House, but not in the Senate, its legislation can't pass. In the Senate, a 50-50 split could be broken with the vice-president's vote, and for some legislation, it's a majority of 60+ that's needed to pass the Senate.</p>
+      </aside>
+
+      <p>This is the evolution of free vs slave states between 1789 and the eve of the Civil War in 1861:</p>
+
+      <!-- TODO: Component: map-sequence
+           Maps (in order): img-05 (1789), img-06 (1821), img-08 (1861)
+           Fixed horizontal timeline bar at bottom with year markers.
+           Sticky positioning: maps stay in viewport while explanatory text scrolls alongside.
+           Transitions: crossfade between maps as reader scrolls to each dated paragraph.
+           On mobile: collapses to a simple progress indicator (dots or minimal timeline).
+           See COMPONENTS.md #4 (Chronological Map Sequence), TODO.md "THE SLAVERY RACE TO THE WEST" -->
+      <figure data-img-id="img-05" data-component="map-sequence" data-year="1789" data-sequence-index="0">
+        <img
+          src="images/img-05.gif"
+          alt="US map showing more slave states than free states in 1789 when the country was founded"
+          loading="lazy">
+      </figure>
+
+      <p>When the US became a country, it had more slave states than free states. But over the following decades, the northern population and its expansion accelerated. By 1820, there were the same number of slave vs free states. A bigger population in the North meant it controlled the House, but as long as the number of free and slave states was the same, the public mandate would not clearly support abolition, and Northerners wouldn't have a majority to impose it, as Southerners could block any anti-slavery legislation in the Senate.</p>
+
+      <p>In 1820, Missouri wanted to become a (slave) state, but that would have upended the balance, so the <a href="https://en.wikipedia.org/wiki/Missouri_Compromise" target="_blank" rel="noopener">Missouri Compromise</a> was reached: The US would also accept Maine as a state, keeping the balance, and from thereon free vs slave statehood would be determined based on the 36º30' parallel, north of which states would be free.</p>
+
+      <figure data-img-id="img-06" data-component="map-sequence" data-year="1821" data-sequence-index="1">
+        <img
+          src="images/img-06.png"
+          alt="US map showing equal numbers of free and slave states after the Missouri Compromise of 1821"
+          loading="lazy">
+      </figure>
+
+      <p>This bought some time, but cemented the idea that each side had to rush westwards as fast as possible to create new states for their camp, lest it lose the senate balance.<sup id="fnref-3"><a href="#fn-3">3</a></sup> And the South saw the writing on the wall:</p>
+
+      <!-- fn-3: Context — cotton boom as additional westward push factor -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-3">
+        <p>Another push westwards in the South was the huge global cotton boom triggered by the cotton industrial revolution around Manchester, in England. But this pushed for settlement westward, not for incorporation into states.</p>
+      </aside>
+
+      <!-- TODO: Component: data-viz
+           Image: img-21 (North vs South population graph, line chart)
+           Chart type: line (two series: North pop, South pop)
+           Build on scroll-enter: lines draw from left to right.
+           Hover/tap for year-by-year tooltips.
+           Caption: includes enslaved people in states; sources note 22M vs 9M disparity in 1860.
+           See COMPONENTS.md #9 (Graph / Data Visualization) -->
+      <figure data-img-id="img-21" data-component="data-viz" data-chart-type="line">
+        <img
+          src="images/img-21.jpg"
+          alt="Line graph showing North vs South population divergence from 1790 to 1860, with the North pulling dramatically ahead"
+          loading="lazy">
+        <figcaption><em>This includes enslaved people in states, but not those in territories. Other sources claim the difference in 1860 was even starker, with 22M people in the North vs 9M in the South.</em></figcaption>
+      </figure>
+
+      <p>The Northern population grew faster than the Southern one. The result was this population density map on the eve of the Civil War:</p>
+
+      <figure data-img-id="img-07" data-component="image-motion" data-motion-type="none">
+        <img
+          src="images/img-07.jpg"
+          alt="US population density map in 1860 showing the heavily populated Northeast and sparse South"
+          loading="lazy">
+        <figcaption><em>The <a href="https://www.census.gov" target="_blank" rel="noopener">source</a> for this map has the evolution of US population density for the past ~200 years.</em></figcaption>
+      </figure>
+
+      <figure data-img-id="img-08" data-component="map-sequence" data-year="1861" data-sequence-index="2">
+        <img
+          src="images/img-08.gif"
+          alt="US map showing free vs slave states in 1861 at the start of the Civil War, with the North now clearly dominant in number of states"
+          loading="lazy">
+      </figure>
+
+      <p>By 1860, it was clear that the North's population had outpaced the South's. The Republican Party had been founded in 1854 specifically to oppose the extension of slavery into new territories. Their 1860 platform was unambiguous:</p>
+
+      <!-- TODO: Component: rich-quote
+           Quote: Lincoln Republican Party Platform, 1860
+           Attribution: Platform Adopted by the National Republican Convention, Chicago, May 17, 1860. Library of Congress.
+           Optional: small portrait of Lincoln or convention scene.
+           Mood: tension — this is the political flashpoint.
+           See COMPONENTS.md #6 (Rich Quote), TODO.md "Lincoln quote + platform excerpt" -->
+      <blockquote data-component="rich-quote" data-mood="tension">
+        <p><em>We deny the authority of Congress, of a territorial legislature, or of any individuals, to give legal existence to slavery in any Territory of the United States.</em></p>
+        <footer>—<cite><a href="https://www.loc.gov/item/rbpe.0380040a/" target="_blank" rel="noopener">Platform Adopted by the National Republican Convention</a>, held in Chicago, May 17, 1860. Library of Congress.</cite></footer>
+      </blockquote>
+
+      <p>As soon as Lincoln won, and before he was even inaugurated, <a href="https://en.wikipedia.org/wiki/Secession_in_the_United_States" target="_blank" rel="noopener">Southern states started seceding</a>.<sup id="fnref-4"><a href="#fn-4">4</a></sup></p>
+
+      <!-- fn-4: Anecdote — the escalating conflicts leading to secession -->
+      <aside data-component="inline-footnote" data-footnote-type="anecdote" id="fn-4">
+        <p><em>The conflict between states on slavery had been heightening for decades: the <a href="https://en.wikipedia.org/wiki/Fugitive_Slave_Act_of_1850" target="_blank" rel="noopener">Fugitive Slave Act of 1850</a>, <a href="https://en.wikipedia.org/wiki/Personal_liberty_laws" target="_blank" rel="noopener">personal liberty laws</a>, the <a href="https://en.wikipedia.org/wiki/Kansas%E2%80%93Nebraska_Act" target="_blank" rel="noopener">Kansas–Nebraska Act</a> that effectively repealed the Missouri Compromise, <a href="https://en.wikipedia.org/wiki/Bleeding_Kansas" target="_blank" rel="noopener">Bleeding Kansas</a> (a kind of dress rehearsal of the Civil War), the <a href="https://en.wikipedia.org/wiki/Caning_of_Charles_Sumner" target="_blank" rel="noopener">caning of Abolitionist Senator Charles Sumner</a>, the <a href="https://en.wikipedia.org/wiki/Dred_Scott_v._Sandford" target="_blank" rel="noopener">Dred Scott vs Sanford</a> case that ruled that African Americans couldn't be US citizens, the <a href="https://en.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry" target="_blank" rel="noopener">raids and execution of John Brown</a>…</em></p>
+      </aside>
+
+      <p>All of this shows that the single most important cause of the Civil War was slavery, and it came to a head when the North's population outgrew the South's.</p>
+
+      <!-- TODO: Component: chapter-break
+           Text: "But hold on, why was the Northern population growing faster than the South's?"
+           This is the second Crucial Question — bridges from political history to demographic/economic causes.
+           Background reset; larger weighted type; beat of visual silence.
+           See COMPONENTS.md #1 (Chapter Break), TODO.md -->
+      <p data-component="chapter-break">But hold on, why was the Northern population growing faster than the South's?</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 3: FEEDING THE NORTHERN GROWTH
+         ============================================================ -->
+    <section id="feeding-northern-growth">
+
+      <h2>Feeding the Northern Growth</h2>
+
+      <p>Most immigrants went to the North.</p>
+
+      <!-- TODO: Component: data-viz
+           Image: img-22 (immigration origins map — where immigrants came from and where they settled)
+           Chart type: choropleth or annotated map
+           Build on scroll-enter: regions highlight, flow lines animate.
+           See COMPONENTS.md #9 (Graph / Data Visualization) -->
+      <figure data-img-id="img-22" data-component="data-viz">
+        <img
+          src="images/img-22.jpg"
+          alt="Map showing the origins of immigrants to the US and their concentration in Northern free states"
+          loading="lazy">
+      </figure>
+
+      <p>Nearly <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">90%</a> of foreign immigrants settled in free states.</p>
+
+      <p>Then they had children, and those had children, and the population of the north grew faster. I spot-checked the share of population that was either foreign or had a foreign parent, and this is what it looked like:</p>
+
+      <!-- TODO: Component: data-viz
+           Image: img-09 (foreign-born population chart by state, bar chart)
+           Chart type: bar — Northern states clustered high, Southern states low
+           Build on scroll-enter: bars grow up from baseline.
+           Hover/tap for state-level tooltips.
+           Standardized (?) icon for methodology note.
+           See COMPONENTS.md #9 (Graph / Data Visualization) -->
+      <figure data-img-id="img-09" data-component="data-viz" data-chart-type="bar">
+        <img
+          src="images/img-09.jpg"
+          alt="Bar chart showing share of foreign-born population by US state in 1860 — Northern states much higher than Southern"
+          loading="lazy">
+      </figure>
+
+      <p>Northern states tended to have a much higher share of foreigners than Southern states because they received much more immigration.</p>
+
+      <p>It wasn't just foreigners coming to the US; there was also massive internal migration of Americans moving westward: Around 1850, nearly <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">50%</a> of Americans had moved from their state of birth!<sup id="fnref-5"><a href="#fn-5">5</a></sup> But they tended to choose Northern states over Southern ones.<sup id="fnref-6"><a href="#fn-6">6</a></sup></p>
+
+      <!-- fn-5: Anecdote — 75% of working-age males left their communities -->
+      <aside data-component="inline-footnote" data-footnote-type="anecdote" id="fn-5">
+        <p>And 75% of working age males disappeared from their communities to move elsewhere!</p>
+      </aside>
+
+      <!-- fn-6: Context — specific state count breakdown (FL/AR/TX vs MI/WI/MN/IA) -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-6">
+        <p>This is why between the Missouri Compromise and 1860, only Florida, Arkansas, and Texas became slave states, whereas in the Midwest, Michigan, Wisconsin, Minnesota, and Iowa became states, on top of Oregon and California of course. While Texas became a state because of the war the US won against Mexico.</p>
+      </aside>
+
+      <!-- TODO: Component: data-viz
+           Image: img-23 (interstate migration flows — arrows/sankey showing movement patterns)
+           Motion type: animated particle flows along migration routes (future enhancement)
+           Note: these flows represent White migration only — important caveat in caption.
+           See COMPONENTS.md #9, TODO.md "Interstate Migration Flows [img-23] with animated particle flows" -->
+      <figure data-img-id="img-23" data-component="data-viz" data-motion-type="particle">
+        <img
+          src="images/img-23.jpg"
+          alt="Interstate migration flow chart circa 1850 showing dominant movement from South to North and East to West among White Americans"
+          loading="lazy">
+        <figcaption><em>Note these are <strong>Whites.</strong> This is important. It's not clear from the original graph what "northward and eastward" takes as original and destination states really, but given the definition, I decided to color it as predominantly south-to-north migration.</em></figcaption>
+      </figure>
+
+      <p>So now we know the Civil War was caused by the disagreement over slavery, that it erupted when the North outgrew the South, and that this happened because foreigners and Americans moved to the North en masse.</p>
+
+      <!-- TODO: Component: sub-break
+           Text: "But why did immigrants go to the North?"
+           Lighter treatment than chapter-break: horizontal rule, slight pause, no SFX.
+           See COMPONENTS.md #2 (Sub-chapter Break / Minor Question) -->
+      <p data-component="sub-break">But why did immigrants go to the North?</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 4: THE MAGNETIC NORTH (sub-section of Feeding)
+         ============================================================ -->
+    <section id="magnetic-north">
+
+      <h3>The Magnetic North</h3>
+
+      <p>About <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">90% of immigrants</a><sup id="fnref-7"><a href="#fn-7">7</a></sup> went to the North, a majority to work in farms:</p>
+
+      <!-- fn-7: Context — demographic breakdown (more Whites than Blacks, more males than women) -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-7">
+        <p>More Whites than Blacks, and more males than women.</p>
+      </aside>
+
+      <!-- TODO: Component: progressive-reveal
+           Items: the 4 bullet points below (reasons immigrants chose North over South)
+           Optional icons: wage/money icon, land/property icon, industry/factory icon, skull/mortality icon
+           Reveal style: fade-in sequentially on scroll
+           Previous items remain visible but may dim slightly as new items appear.
+           See COMPONENTS.md #5 (Progressive Reveal / Bullet Points), TODO.md "THE MAGNETIC NORTH" -->
+      <ul data-component="progressive-reveal">
+        <li>The South had slaves, which depressed labor costs, and wages in the South were lower.</li>
+        <li>The North made it easier for immigrants to own land and reap what they sowed.</li>
+        <li>The industry in the North was more diversified, so workers had options beyond farming.</li>
+        <li>Mortality was higher in the South.</li>
+      </ul>
+
+      <p>And why is all this the case?</p>
+
+      <p>This is a map of crops in 1860, just before the US Civil War (1861–65):</p>
+
+      <figure data-img-id="img-10" data-component="image-motion" data-motion-type="none">
+        <img
+          src="images/img-10.jpg"
+          alt="Map of US crops in 1860 showing wheat and grain in the North, cotton and tobacco in the South"
+          loading="lazy">
+      </figure>
+
+      <p>The drier and cooler North grew mostly wheat, barley, and oats.<sup id="fnref-8"><a href="#fn-8">8</a></sup><br>
+      The warmer and more humid South grew mostly cotton, tobacco, sugar, and rice.</p>
+
+      <!-- fn-8: Context — corn as a "mixed" crop not strictly North or South -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-8">
+        <p>Corn is more mixed. It tended (and tends) to be farmed more in the north, but could also grow south of the standard North-South line.</p>
+      </aside>
+
+      <p>This is actually not that different today. These are the traditional northern crops:</p>
+
+      <!-- TODO: Component: switcher (paired comparison)
+           Items: img-11 (Northern crops: oat, corn, wheat, barley) + img-12 (Southern crops: cotton, tobacco, sugar, rice)
+           allow-comparison="true" → render side-by-side or as a switchable tab pair
+           Tab labels: "Northern Crops" / "Southern Crops"
+           Each tab shows: image + crop list + brief description
+           On mobile: stacked tabs, swipeable
+           See COMPONENTS.md #7 (Switcher / Tab Selector), TODO.md "CROP COMPARISON" -->
+      <div data-component="switcher" data-allow-comparison="true">
+        <figure data-img-id="img-11" data-switcher-label="Northern Crops">
+          <img
+            src="images/img-11.png"
+            alt="USDA maps showing distribution of oat, corn, wheat, and barley crops across the United States"
+            loading="lazy">
+          <figcaption><em>Wheat is farmed in the center as a winter crop</em></figcaption>
+        </figure>
+        <figure data-img-id="img-12" data-switcher-label="Southern Crops">
+          <img
+            src="images/img-12.png"
+            alt="USDA maps showing distribution of cotton, tobacco, sugar, and rice crops across the United States"
+            loading="lazy">
+          <figcaption><em>Tobacco has disappeared from the USDA's main maps page</em></figcaption>
+        </figure>
+      </div>
+
+      <p>This sounds like a small difference, but it's so momentous that we can consider it the single biggest driver of the Civil War. Why? Because wheat, barley, and corn grow in northern climates and happen to require much less work than cotton, tobacco, sugar, and rice, which grow in southern climates. This led to families taking care of small independent farms in the North and big landowners setting up plantations worked by slaves in the South.</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 5: THE CROP DIVERGENCE
+         ============================================================ -->
+    <section id="crop-divergence">
+
+      <h2>The Crop Divergence</h2>
+
+      <h3>The Ease of Northern Crops</h3>
+
+      <p>Raising crops generally entails three phases:</p>
+
+      <!-- TODO: Component: progressive-reveal (ordered, icon-paired)
+           Items: the 3 farming phases below — each step paired with corresponding photo (img-13, img-14, img-15)
+           Style: PPT-style sequential reveal with icon per step
+           Icons: plow/seed, scythe/sheaf, gear/machine
+           See COMPONENTS.md #5 (Progressive Reveal), TODO.md "Three farming phases (prepare, harvest, process)" -->
+      <ol data-component="progressive-reveal" data-reveal-style="sequential">
+        <li>Preparing the soil and seeding</li>
+        <li>Harvesting</li>
+        <li>Post-processing</li>
+      </ol>
+
+      <p>For northern crops, these processes were easy,<sup id="fnref-9"><a href="#fn-9">9</a></sup> and tools (and later, machines) made it even easier.</p>
+
+      <!-- fn-9: Context — detailed breakdown of wheat/oat farming phases -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-9">
+        <p>For wheat and oats, the first phase included plowing the field, harrowing (breaking up soil clods, leveling the field, and uprooting weeds), and sowing. The second phase included reaping, raking (aligning), binding, and shocking (putting the wheat bundles (shocks) upright to dry). The third phase included threshing (separating wheat grains from their husks and stalks) and shelling (removing the protective husks).</p>
+      </aside>
+
+      <p>For example, preparing the soil for wheat or oats required plowing and harrowing fields, and sowing, which took about <a href="https://www.jstor.org/stable/2122840" target="_blank" rel="noopener">13</a> hours per acre (13 h/a).</p>
+
+      <figure data-img-id="img-13" data-component="image-motion" data-motion-type="none" data-phase="1">
+        <img
+          src="images/img-13.jpg"
+          alt="Historical photograph of a farmer plowing a field with an iron plow pulled by horses"
+          loading="lazy">
+        <figcaption><em>Plowing a field with an iron plow and horses</em></figcaption>
+      </figure>
+
+      <p>Then came reaping season, which could be done in one pass of cutting the wheat, aligning it, bundling it, and putting the bundles upright to dry. This took about 14 h/a.</p>
+
+      <figure data-img-id="img-14" data-component="image-motion" data-motion-type="none" data-phase="2">
+        <img
+          src="images/img-14.jpg"
+          alt="Historical photograph of a farmer using a grain cradle scythe to harvest wheat"
+          loading="lazy">
+        <figcaption><em>This farmer is using a <a href="https://en.wikipedia.org/wiki/Grain_cradle" target="_blank" rel="noopener">grain cradle</a>, which didn't just cut the wheat, but also kept grain stems aligned, so it would be easier to bundle them later.</em></figcaption>
+      </figure>
+
+      <p>Finally, you had to thresh: Extract the grain from the stalks, and then from the husk. This took about 8 h/a,<sup id="fnref-10"><a href="#fn-10">10</a></sup> for a total of about 33 h/a.</p>
+
+      <!-- fn-10: Source — paper citation: 11 bushels/acre, 0.73 h/bushel -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-10">
+        <p><em><a href="https://www.jstor.org/stable/2122840" target="_blank" rel="noopener">The paper</a> says 11 bushels per acre and 0.73 hours per bushel, so that's 8 h/a.</em></p>
+      </aside>
+
+      <figure data-img-id="img-15" data-component="image-motion" data-motion-type="none" data-phase="3">
+        <img
+          src="images/img-15.jpg"
+          alt="Historical photograph showing a threshing operation separating wheat grain from stalks"
+          loading="lazy">
+      </figure>
+
+      <p>Luckily, each one of these steps was easy to mechanize:</p>
+
+      <!-- TODO: Component: image-motion
+           Image: img-24 (mechanization machines — plowing, harrowing, reaping, threshing)
+           Motion type: Ken Burns (slow pan/zoom to emphasize the array of machinery)
+           This image is the payoff of the "easy to mechanize" narrative.
+           See COMPONENTS.md #10 (Image with Motion), TODO.md "Mechanization images [img-24] as energy boost" -->
+      <figure data-img-id="img-24" data-component="image-motion" data-motion-type="kenburns">
+        <img
+          src="images/img-24.jpg"
+          alt="Collage of 19th century farm mechanization: horse-drawn plowing, harrowing, reaping, and threshing machines"
+          loading="lazy">
+        <figcaption><em>Plowing, harrowing, reaping, and threshing machines</em></figcaption>
+      </figure>
+
+      <p>Mechanization was happening through the 19th century, and shrunk the work to produce wheat from 33 h/a in 1839 to 11 h/a in 1910.<sup id="fnref-11"><a href="#fn-11">11</a></sup> As an example, <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">by 1860</a>, a threshing machine could thresh 12 times as much grain per hour as could six men: That's a 70x improvement in productivity per hour! On average, in 1840, wheat took 33 h/a, oats 31 h/a, and corn 61 h/a.<sup id="fnref-12"><a href="#fn-12">12</a></sup></p>
+
+      <!-- fn-11: Source — detailed h/a numbers pre/post mechanization from paper -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-11">
+        <p><em>From <a href="https://www.jstor.org/stable/2122840" target="_blank" rel="noopener">this paper</a>: Preparing the soil and sowing went from 13.6 h/a to 5.5 h/a; reaping and preparing the stalks from 13.9 h/a to 2.4 h/a. Every acre went from producing 11.3 bushels per acre (b/a) to 14 b/a, and the processing of every bushel went from 0.73 h/b to 0.2 h/b, for a total of this third step of 2.8 h/a.</em></p>
+      </aside>
+
+      <!-- fn-12: Source — corn prep time detail (61 h/a) from same paper -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-12">
+        <p><em>From <a href="https://www.jstor.org/stable/2122840" target="_blank" rel="noopener">the same paper</a>. Corn took much more time because, although farmers didn't need to work on the ear as much (the bundle of yellow grains), preparing the land was much more time-consuming. It required field preparation, planting, cultivating, and hoeing, which took 61 h/a.</em></p>
+      </aside>
+
+      <h3>Harrowing Southern Crops</h3>
+
+      <p>That was <em>not</em> the case in the South. Consider cotton, which accounted for over <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">60% of US exports</a> in 1860.</p>
+
+      <figure data-img-id="img-16" data-component="image-motion" data-motion-type="none">
+        <img
+          src="images/img-16.jpg"
+          alt="A cotton field with bolls open and ready for picking"
+          loading="lazy">
+        <figcaption><em>A cotton field</em></figcaption>
+      </figure>
+
+      <p>Cotton took about <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">130</a> h/a of work!<sup id="fnref-13"><a href="#fn-13">13</a></sup></p>
+
+      <!-- fn-13: Source — data sourcing difficulty, regional variations -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-13">
+        <p><em>This is actually quite hard to find. The data comes from <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">here</a>, but different breakdowns of the tasks give different numbers. This makes sense, as there are differences in regions, in soil quality, in weather, in productivity, in varietals, in data quality… For this purpose, we don't care exactly how many hours or work per acre were required, only why, and orders of magnitude of how much more work they involved compared to Northern crops.</em></p>
+      </aside>
+
+      <p class="callout"><strong>An acre of cotton required 4x the work as an acre of wheat.</strong></p>
+
+      <p><strong>What?!</strong><br>How is this possible?</p>
+
+      <p>Cotton requires about 70 h/a of field preparation, and about 60 h/a of harvesting,<sup id="fnref-14"><a href="#fn-14">14</a></sup> so each step took much more work than the entire wheat cycle!</p>
+
+      <!-- fn-14: Context — the cotton gin transformed processing but not field/harvest labor -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-14">
+        <p>After the invention of the cotton gin, working the cotton to extract the useful fiber became much easier, (so cheaper, as fewer hours were needed), so the processing went from extremely laborious to very fast and easy. This is, in fact, what allowed the cotton boom, as suddenly the cost of processing became low enough that a mass market could afford cotton clothes. This then triggered a big part of the English Industrial Revolution.</p>
+      </aside>
+
+      <p>To prepare the land, the woody cotton stalks must first be cut, or they jam the plow. Then, since cotton likes humidity but doesn't like the ground to be waterlogged, it must be plowed once, and then ridges need to be made to plant the cotton above the rest of the ground. Then, the ridges must be somewhat leveled so that the cotton seeds don't fall too deep. Then, planting must be done accurately, so that the distance between plants is ideal for pickers to optimally run between them. The seed is small so it must be planted carefully near the surface. Later, as there are plenty of seeds, you get overseeding, so too many plants grow. Some need to be cut early. And finally, since it's warm and humid, a lot of weeds grow, so fields need to be constantly weeded.</p>
+
+      <p>That's just the soil and sowing work! The picking also took much longer than wheat because:</p>
+
+      <ul>
+        <li>Wheat (and oats, barley, and corn) is a strong grain, but cotton is a delicate boll that must be hand-picked.</li>
+        <li>Cotton bolls don't open at the same time, and they need to be harvested as they open, so cotton requires multiple harvest passes! While wheat, corn, oats, and barley can all be harvested together.</li>
+      </ul>
+
+      <p>Also, a lot of this work could not be easily automated, because the bolls were delicate, the plants all differed in opening times, the soil was wet and uneven… Mechanization of cotton has taken much longer than wheat.<sup id="fnref-15"><a href="#fn-15">15</a></sup></p>
+
+      <!-- fn-15: Source/Context — cotton automation happened mostly in the 20th century -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-15">
+        <p><em>A lot of the automation in cotton farming actually happened in the 20th century. <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">For example</a>, forcing the blooming at the same time required breeding specific varieties of cotton and using defoliant, and it took hundreds of iterations for machines to be able to pick cotton. All these innovations converged around the 1940s, 80 years after the Civil War.</em></p>
+      </aside>
+
+      <p>This is the case for cotton, but as we saw, rice requires <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">2x</a> more work than wheat. And that's the easy one. Tobacco and sugarcane required an overwhelming amount of work: around <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">250</a> h/a for sugarcane<sup id="fnref-16"><a href="#fn-16">16</a></sup> and <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">300</a>–<a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">900</a> h/a for tobacco,<sup id="fnref-17"><a href="#fn-17">17</a></sup> or 10x to 30x more than wheat! Why?</p>
+
+      <!-- fn-16: Source — 256 h/a sugarcane calculation from paper -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-16">
+        <p><em>I count 32 person-days per acre, or 256 h/a, from <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">this paper</a>. This doesn't include mule time.</em></p>
+      </aside>
+
+      <!-- fn-17: Source — tobacco 450 h/a in the 1940s, another data point -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-17">
+        <p>Another data point: apparently as late as the 1940s it took <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">450 h/a</a>!</p>
+      </aside>
+
+      <p><a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">Tobacco</a> exhausted soil quickly, after just a handful of seasons, so new farmland had to be bought and the workers had to move all the time. Then, tobacco needs to be grown in a nursery before being transplanted. Huh? Tobacco seeds are like dust, with <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">thousands of seeds per gram</a>. They need a very fine, weed-free, moist surface to germinate. If you broadcast them onto a plowed field, most would be buried too deep, dry out, or be swamped by weeds.</p>
+
+      <p>Tobacco must then be grown with precise spacing for airflow, disease control, leaf development, and picking ease.</p>
+
+      <figure data-img-id="img-25" data-component="image-motion" data-motion-type="none">
+        <img
+          src="images/img-25.png"
+          alt="Workers hand-harvesting tobacco leaves in a field — each leaf must be picked individually"
+          loading="lazy">
+        <figcaption><em>Harvesting tobacco leaves. <a href="https://commons.wikimedia.org/wiki/File:Tobacco_harvest.jpg" target="_blank" rel="noopener">Source</a></em></figcaption>
+      </figure>
+
+      <p>The leaves must remain intact, so they have to be picked by hand. Then, they have to be carried to barns to cure.</p>
+
+      <p>Sugar cane was another highly complex crop. For example, the soil had to be plowed deep, and needed straight furrows; what you plant is last year's cane stalks, which are bulky and heavy and must be placed one by one. Sugarcane has to be cut and then immediately crushed and boiled in sugar mills on-site, which meant you couldn't harvest everything at once, and needed lots of coordination.</p>
+
+      <figure data-img-id="img-26" data-component="image-motion" data-motion-type="none">
+        <img
+          src="images/img-26.jpg"
+          alt="Workers hand-harvesting sugarcane, cutting heavy stalks that must be immediately processed on-site"
+          loading="lazy">
+        <figcaption><em>Hand-harvesting of sugarcane. <a href="https://commons.wikimedia.org/wiki/File:Sugarcane_harvest.jpg" target="_blank" rel="noopener">Source</a>.</em></figcaption>
+      </figure>
+
+      <p>This is the result:</p>
+
+      <!-- TODO: Component: data-viz (KEY VISUALIZATION — give it room to breathe)
+           Image: img-27 (crop work requirements bar chart — hours per acre by crop)
+           Chart type: horizontal bar chart, crops sorted by h/a
+           REVEAL STRATEGY: Don't show immediately. Build tension first (all the above text).
+           Animation: Northern crop bars appear first, then Southern crop bars animate in — emphasizing contrast.
+           Bars appear one by one, shortest to tallest within each group.
+           Hover/tap for exact h/a values per crop.
+           Color: Northern crops one palette (cool), Southern crops contrasting palette (warm).
+           Standardized (?) icon for data sources/methodology.
+           This is the emotional climax of the Crop Divergence section.
+           See COMPONENTS.md #9 (Graph / Data Visualization), TODO.md "CROP WORK REQUIREMENTS GRAPH [img-27]" -->
+      <figure data-img-id="img-27" data-component="data-viz" data-chart-type="bar" data-reveal="animated">
+        <img
+          src="images/img-27.jpg"
+          alt="Bar chart comparing hours per acre required for Northern crops (wheat ~33 h/a, oats ~31 h/a, corn ~61 h/a) vs Southern crops (cotton ~130 h/a, rice ~65 h/a, sugarcane ~250 h/a, tobacco ~300–900 h/a)"
+          loading="lazy">
+        <figcaption><em>Corn is teal because it was not exclusively a Northern crop</em></figcaption>
+      </figure>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 6: THE ECONOMIC DIVERGENCE
+         ============================================================ -->
+    <section id="economic-divergence">
+
+      <h2>The Economic Divergence</h2>
+
+      <p>In the North, a single family in a homestead was enough to handle a big farm. At most, families could live in villages to help each other, but they remained fiercely independent. They preferred owning their farm so they could improve it and invest in machinery to cultivate more land and improve yields with less work. This led to freedom, entrepreneurship, and the ability to grow rich through wit and grind. Of course people flooded to the north!</p>
+
+      <p>This economic path didn't require slaves: Slavery is actually expensive because you need a management layer to coerce the slaves, and even then, slaves work against their will. Entrepreneurship and freedom remove this inefficiency, so by 1830, Northern states had <a href="https://www.census.gov/history/www/homepage_archive/2012/november_2012.html" target="_blank" rel="noopener">virtually</a> abolished slavery.</p>
+
+      <p>Meanwhile, in the south, crops needed massive amounts of work. This meant that the biggest share of costs was human labor. There was a huge incentive to lower that cost, and slavery was the answer: With paid labor, these cash crops would have been <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">uncompetitive</a> in the world market. A natural approach to this would have been to automate the work as much as possible, but this was impossible at the time given the requirements of these crops.<sup id="fnref-18"><a href="#fn-18">18</a></sup> So White landowners turned to the horrible solution that was actually available to them at the time—slavery.</p>
+
+      <!-- fn-18: Context — automation only kicks in once already producing at scale -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-18">
+        <p><em>To say nothing of the fact that automation and optimization only kick in once you're already producing at scale.</em></p>
+      </aside>
+
+      <p>In the 19th century, slaves were 2–5x cheaper than wage workers, and were probably more productive,<sup id="fnref-19"><a href="#fn-19">19</a></sup> so the Southern White farmers who could afford it bought land, slaves, and created plantations, as they had existed in the region and the wider Caribbean for centuries.</p>
+
+      <!-- fn-19: Source — paper on slave productivity vs free workers -->
+      <aside data-component="inline-footnote" data-footnote-type="source" id="fn-19">
+        <p><em><a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">From this paper</a>. The paper doesn't quote the gap between free workers and slaves, but you can eyeball the graph to get orders of magnitude. It also mentions how slaves were not less productive than free workers, and might have been more productive. Also <a href="https://www.jstor.org/stable/2951824" target="_blank" rel="noopener">this paper's abstract</a> corroborates it.</em></p>
+      </aside>
+
+      <p>By the time of the Civil War, the productivity of these crops had improved enough, and the cost of slaves increased enough, that cultivating these crops with paid workers was possible. But by then, the system was locked in: The Southern farmers didn't want to lose their massive investments in slaves and juicy profits! Their entire economy depended on these slaves, and they were willing to go to war to keep them.</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 7: SOMETHING BAD'S IN THE AIR (MALARIA)
+         ============================================================ -->
+
+    <!-- TODO: Component: mood-layer
+         Mood: "fear"
+         On section-enter: background color shifts (cooler, slightly darker tone — dread, sickness)
+         Optional ambient audio: distant mosquito hum, low drone (very subtle, must be mutable)
+         Typography may adjust: slightly tighter spacing
+         On section-exit (into Conclusion): transition to "triumph"
+         See COMPONENTS.md #11 (Mood / Emotion Layer), TODO.md "SOMETHING BAD'S IN THE AIR (MALARIA)" -->
+    <section id="malaria" data-mood="fear">
+
+      <h2>Something Bad's in the Air</h2>
+
+      <p>There was another reason why immigrants shunned the south: the bad air, or <em>malaria</em>.</p>
+
+      <!-- TODO: Component: rich-quote
+           Quote: "Mortality was likely lowest in New England and rose as the latitude moved further south."
+           Attribution: The Urban Mortality Transition in the United States, 1800–1940, Michael R. Haines
+           Mood: fear — this is where the malaria section's emotional weight begins.
+           No portrait needed; stark typographic treatment, muted background.
+           See COMPONENTS.md #6 (Rich Quote), TODO.md "Mortality quote: Rich Quote component" -->
+      <blockquote data-component="rich-quote" data-mood="fear">
+        <p><em>Mortality was likely lowest in New England and rose as the latitude moved further south.</em></p>
+        <footer>—<cite><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2834283/" target="_blank" rel="noopener">The Urban Mortality Transition in the United States, 1800–1940</a>, Michael R. Haines</cite></footer>
+      </blockquote>
+
+      <!-- TODO: Component: data-viz
+           Image: img-17 (malaria risk map — geographic distribution)
+           Chart type: choropleth (colored geographic heatmap)
+           Future: replace static image with SVG/canvas-based heatmap with hover detail per county/state
+           Apply colored filter overlay to emphasize risk zones (warm reds in South).
+           See COMPONENTS.md #9, TODO.md "Malaria risk map: colored filter or SVG/canvas heatmap [img-17]" -->
+      <figure data-img-id="img-17" data-component="data-viz" data-chart-type="choropleth">
+        <img
+          src="images/img-17.png"
+          alt="Map showing malaria risk zones in the United States in the 19th century — concentrated in the South and absent above the Mason-Dixon line"
+          loading="lazy">
+      </figure>
+
+      <p>Malaria was pervasive in the South, because it's hot and humid, and mosquitoes thrive there.</p>
+
+      <!-- TODO: Component: rich-quote
+           Quote: "A child with malaria, if not killed outright..."
+           Attribution: How four once common diseases were eliminated from the American South, Margaret Humphreys
+           Mood: fear — the most visceral moment of this section.
+           See COMPONENTS.md #6 (Rich Quote) -->
+      <blockquote data-component="rich-quote" data-mood="fear">
+        <p><em>A child with malaria, if not killed outright, suffers stunted growth, lethargy, and decreased cognitive development. An adult with chronic malarial infection is often listless and weak.</em></p>
+        <footer>—<cite><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2834283/" target="_blank" rel="noopener">How four once common diseases were eliminated from the American South</a>, Margaret Humphreys</cite></footer>
+      </blockquote>
+
+      <p>The impact can be seen by the fact that malaria eradication raised income in the "malaria-free" generation born in the next decade by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2834283/" target="_blank" rel="noopener">15%</a>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2834283/" target="_blank" rel="noopener">Going back</a> to the Mason-Dixon line that originally separated Free and Slave States:</p>
+
+      <!-- TODO: Component: rich-quote
+           Quote: "Below it the Plasmodium parasite could live..."
+           No attribution — scientific statement cited in the article.
+           Lighter treatment than the other two malaria blockquotes.
+           See COMPONENTS.md #6 (Rich Quote) -->
+      <blockquote data-component="rich-quote" data-mood="fear">
+        <p><em>Below it the Plasmodium parasite</em> [that causes malaria] <em>could live, and above it, the vector mosquitoes would survive, but the Plasmodium inside them would die.</em></p>
+      </blockquote>
+
+      <p>Malaria was <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2834283/" target="_blank" rel="noopener">not the only disease</a> in the region: Yellow fever and hookworm also festered there.<sup id="fnref-20"><a href="#fn-20">20</a></sup> White immigrants didn't want to go there to die, especially since this was before the discovery of quinine, <a href="https://en.wikipedia.org/wiki/Quinine" target="_blank" rel="noopener">which allowed Europeans to move to tropical regions</a>.</p>
+
+      <!-- fn-20: Context — Mason-Dixon line as malaria demarcation -->
+      <aside data-component="inline-footnote" data-footnote-type="context" id="fn-20">
+        <p><em>Some could also be found in the North, but the prevalence was much lower. The Mason-Dixon Line, an early Free-Slave demarcation line, was also a malaria demarcation line: North of it, malaria didn't prevail.</em></p>
+      </aside>
+
+      <p>Meanwhile, Black Africans had more natural immunity to malaria specifically, and also some of these other diseases, or they had suffered some of these diseases in the past and had stronger immunity against them. So Black slaves were a better choice than Whites for working these crops in the South: They died less and had fewer down days.</p>
+
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 8: CONCLUSION
+         ============================================================ -->
+
+    <!-- TODO: Component: mood-layer
+         Mood: "triumph" (gradual transition from "fear" in malaria section)
+         Background brightens; typography opens up with more generous line spacing.
+         The conclusion is the synthesis — the causal chain clicking into place.
+         See COMPONENTS.md #11 (Mood / Emotion Layer) -->
+    <section id="conclusion" data-mood="triumph">
+
+      <h2>Conclusion</h2>
+
+      <p>Imagine you are a European descendant living in 1850, a hard and cruel world, but also a world full of discoveries and economic opportunities. Where would you rather go:</p>
+
+      <ul>
+        <li>To the North, where you can get your own land and become rich by yourself through grinding and mechanizing your farm, or work in industries for higher wages than in your homeland?</li>
+        <li>Or to the South, where you could die of disease, and your main job option was to compete with slaves to grow crops that are hard to mechanize?</li>
+      </ul>
+
+      <p>Early immigrants to the US knew this and went North. This tipped the balance of population towards the North, where slavery was not economically necessary, so it was abolished. Then, as the Northern population grew and their abolitionary stance strengthened, they pushed for imposing abolition of this abhorrent economic system on the South, who depended on it.</p>
+
+      <p>If you track the entire chain of causality, this is what it looks like:</p>
+
+      <!-- TODO: Component: causal-chain (FINAL PAYOFF)
+           Image: img-28 (causal chain diagram — climate → crops → labor → economics → population → war)
+           Reveal mode: progressive — nodes light up / fill in as the corresponding article section has been read.
+           At conclusion, full chain is visible as synthesis.
+           Optional: faint skeleton visible at article start, nodes fill in as reader progresses.
+           Give maximum visual weight and breathing room.
+           See COMPONENTS.md #12 (Causal Chain / Flow Diagram), TODO.md "CONCLUSION — Causal chain diagram" -->
+      <figure data-img-id="img-28" data-component="causal-chain" data-reveal-mode="progressive">
+        <img
+          src="images/img-28.png"
+          alt="Causal chain diagram showing: Climate → different crops (North: grain; South: cotton/tobacco/sugar/rice) → labor requirements → slavery in South / free farms in North → population divergence (North grows faster) → Senate balance tips → Civil War"
+          loading="lazy">
+      </figure>
+
+      <p>And this is how climate caused the US <strong>North</strong> and <strong>South</strong> to enter into Civil War.</p>
+
+      <p>Why does all this matter? Why does <em>GeoHistory</em> matter, more broadly?</p>
+
+      <p>Because for centuries, humans have been fighting each other, blaming each other for their past behaviors and their grievances and what they are owed. Yes, slavery is absolutely abhorrent. What was done is terrible. But if instead, we see history as a <em>mechanism</em>, as the result of massive, hidden forces like climate and crops and economics, we can stop blaming each other for people's terrible past deeds, and try instead to understand these mechanisms to steer humanity in the right direction, together. That's what Uncharted Territories is about.</p>
+
+      <p><em>In fact, you can go farther: This is also why, before the Civil War, its outcome was already determined. And not only that, but the future development of the US North vs South for the following decades was also determined. For the 160 years since the US Civil War, the South has been catching up with the North due to the hindrance of its economic model, determined by climate. This is what we're going to explore in the upcoming articles.</em></p>
+
+    </section>
+
+  </article><!-- /article -->
+
 </body>
 </html>
